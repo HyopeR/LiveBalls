@@ -6,9 +6,9 @@ block content
       .column.twelve.wide
         .ui.stacked.segment.gameArea(ng-click="onClickPlayer($event)")
 
-          .circle.blue(
+          .circle(
               ng-repeat='player in players'
-              ng-style="{'left': player.position.x + 'px', 'top': player.position.y + 'px'}"
+              ng-style="{'left': player.position.x + 'px', 'top': player.position.y + 'px', 'background-color': player.color}"
               id="{{ player.id }}"
             )
             .relative
