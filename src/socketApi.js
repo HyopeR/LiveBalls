@@ -23,6 +23,8 @@ io.on('connection', (socket) => {
         // Object.assign ile Dataları birleştirdik.
         const userData = Object.assign(data, defaultData);
         users.push(userData);
+
+        socket.broadcast.emit('newUser', userData);
     });
 
 });

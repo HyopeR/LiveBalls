@@ -18,26 +18,12 @@ block content
               span.name Joe
               .message This is awesome.
         .ui.items.chat
-          .item
-            .content
-              a.header.name Ted
+          .item(ng-repeat='message in messages')
+            .content(ng-if='!message.type')
+              span [SERVER] &nbsp;
+              a.header.name {{ message.username }} &nbsp;
               .description.message
-                | Hello
-          .item
-            .content
-              a.header.name Jessica
-              .description.message
-                | Hi everyone :)
-          .item
-            .content
-              a.header.name Joe
-              .description.message
-                | This is awesome
-          .item
-            .content
-              a.header.name Paul
-              .description.message
-                | hey
+                | connected.
         .ui.action.input.fluid
           input(type='text', placeholder='Type here...')
           button.ui.button Send
