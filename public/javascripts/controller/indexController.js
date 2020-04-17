@@ -1,6 +1,7 @@
 app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFactory) => {
 
     $scope.messages = [];
+    $scope.players = {};
 
     $scope.init = () => {
         const username = prompt('Please enter username.');
@@ -11,7 +12,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
             return false;
     };
 
-    function initSocket(userame) {
+    function initSocket(username) {
 
         const connectionOptions = {
             reconnectionAttempts: 3,
@@ -20,7 +21,12 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
 
         indexFactory.connectSocket('http://localhost:3000', connectionOptions)
             .then((socket) => {
-                socket.emit('newUser', { userame });
+                socket.emit('newUser', { username });
+
+                socket.on('initPlayers', (players) => {
+                    $scope.players = players;
+                    $scope.$apply();
+                });
 
                 socket.on('newUser', (data) => {
                     const messageData = {
@@ -28,7 +34,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
                             code: 0, // Server or user massage
                             message: 1 // Login or disconnect message
                         }, // info
-                        username: data.userame
+                        username: data.username
                     };
 
                     $scope.messages.push(messageData);
@@ -41,7 +47,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
                             code: 0,
                             message: 0
                         },
-                        username: data.userame
+                        username: data.username
                     };
 
                     $scope.messages.push(messageData);

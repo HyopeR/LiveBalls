@@ -23,14 +23,16 @@ io.on('connection', (socket) => {
         // Object.assign ile Dataları birleştirdik.
         const userData = Object.assign(data, defaultData);
         users[socket.id] = (userData);
-        console.log(users);
+        // console.log(users);
 
         socket.broadcast.emit('newUser', users[socket.id]);
+        socket.emit('initPlayers', users);
     });
 
     socket.on('disconnect', () => {
         socket.broadcast.emit('disUser', users[socket.id]);
         delete users[socket.id];
+        // console.log(users);
     });
 
 });
