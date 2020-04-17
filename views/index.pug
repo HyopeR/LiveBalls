@@ -1,41 +1,41 @@
 extends layout
 
 block content
-  div(ng-controller='indexController')
+  div(ng-controller='indexController', ng-init='init()')
     .ui.one.column.stackable.center.aligned.page.grid.margin-30
       .column.twelve.wide
         .ui.stacked.segment.gameArea
           .circle.blue(style='left:150px; top:100px')
             .relative
-              span.name Mehmet
-              .message Selam
+              span.name Ted
+              .message Hello
           .circle.green(style='left:300px; top:100px')
             .relative
-              span.name Alp
-              .message selam nasılsın :)
+              span.name Jessica
+              .message Hi everyone :)
           .circle.red(style='left:350px; top:300px')
             .relative
               span.name Joe
-              .message this is awesome
+              .message This is awesome.
         .ui.items.chat
           .item
             .content
-              a.header.name Mehmet
+              a.header.name Ted
               .description.message
-                | Selam
+                | Hello
           .item
             .content
-              a.header.name Alp
+              a.header.name Jessica
               .description.message
-                | selam nasılsın :)
+                | Hi everyone :)
           .item
             .content
               a.header.name Joe
               .description.message
-                | this is awesome
+                | This is awesome
           .item
             .content
-              a.header.name Sinang
+              a.header.name Paul
               .description.message
                 | hey
         .ui.action.input.fluid
