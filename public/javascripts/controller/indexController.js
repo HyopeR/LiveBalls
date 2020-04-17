@@ -24,13 +24,30 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
 
                 socket.on('newUser', (data) => {
                     const messageData = {
-                        type: 0, // info backend.
+                        type: {
+                            code: 0, // Server or user massage
+                            message: 1 // Login or disconnect message
+                        }, // info
                         username: data.userame
                     };
 
                     $scope.messages.push(messageData);
                     $scope.$apply();
                 });
+
+                socket.on('disUser', (data) => {
+                    const messageData = {
+                        type: {
+                            code: 0,
+                            message: 0
+                        },
+                        username: data.userame
+                    };
+
+                    $scope.messages.push(messageData);
+                    $scope.$apply();
+                });
+
             }).catch((err) => {
                 console.log(err)
             });
