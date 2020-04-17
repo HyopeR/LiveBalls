@@ -21,7 +21,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
 
         indexFactory.connectSocket('http://localhost:3000', connectionOptions)
             .then((socket) => {
-                socket.emit('newUser', { username });
+                socket.emit('newUser', {username});
 
                 socket.on('initPlayers', (players) => {
                     $scope.players = players;
@@ -31,7 +31,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
                 socket.on('newUser', (data) => {
                     const messageData = {
                         type: {
-                            code: 0, // Server or user massage
+                            code: 0, // Server or user message
                             message: 1 // Login or disconnect message
                         }, // info
                         username: data.username
@@ -70,7 +70,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
                 let animate = false;
                 $scope.onClickPlayer = ($event) => {
                     // console.log($event.offsetX, $event.offsetY);
-                    if(!animate) {
+                    if (!animate) {
                         let x = $event.offsetX;
                         let y = $event.offsetY;
 
@@ -84,10 +84,25 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
                             animate = false;
                         });
                     }
-                }
+                };
+
+                $scope.newMessage = () => {
+                    let message = $scope.message;
+
+                    const messageData = {
+                        type: {
+                            code: 1, // Server or user message
+                        },
+                        username: username,
+                        text: message
+                    };
+
+                    $scope.messages.push(messageData);
+                    $scope.message = '';
+                };
 
             }).catch((err) => {
-                console.log(err)
+            console.log(err)
             });
 
     }

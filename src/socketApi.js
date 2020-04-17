@@ -23,8 +23,6 @@ io.on('connection', (socket) => {
             color: randomColor()
         };
 
-        console.log(defaultData);
-
         // Object.assign ile Dataları birleştirdik.
         const userData = Object.assign(data, defaultData);
         users[socket.id] = (userData);

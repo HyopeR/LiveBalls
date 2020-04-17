@@ -24,6 +24,12 @@ block content
                 | disconnected.
               .description.message(ng-if='message.type.message')
                 | connected.
-        .ui.action.input.fluid
-          input(type='text', placeholder='Type here...')
-          button.ui.button Send
+
+            .content(ng-if='message.type.code')
+              a.header.name {{ message.username }}: &nbsp;
+              .description.message(ng-if='!message.type.message')
+                | {{ message.text }}
+
+        form.ui.action.input.fluid(ng-submit='newMessage()')
+          input(ng-model='message', placeholder='Type here...')
+          button.ui.button(type='Submit') Send
